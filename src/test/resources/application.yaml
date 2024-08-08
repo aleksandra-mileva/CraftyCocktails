@@ -1,0 +1,23 @@
+spring:
+  sql:
+    init:
+      mode: never
+  jpa:
+    hibernate:
+      ddl-auto: create
+
+cloudinary:
+  api-key: key
+  api-secret: secret
+  cloud-name: dlknl4mzd
+
+mail:
+  host: "localhost"
+  port: 1025
+  username: "craftyCocktails@craftyCocktails.com"
+  password: ""
+
+
+site:
+  base:
+    url: http://localhost:8080
