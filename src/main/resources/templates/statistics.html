@@ -1,0 +1,43 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head th:replace="~{fragments/commons::head}"></head>
+
+<body class="profile-body">
+
+<header>
+  <nav th:replace="~{fragments/commons::navigation}"></nav>
+</header>
+
+<div class="container-fluid">
+  <div class="d-flex justify-content-center align-items-center mx-2">
+    <div th:object="${statistics}"
+            class="col-sm- col-lg-5 mx-auto p-5 bg-white mt-3 mb-5 shadow">
+
+      <h2 class="text-center text-dark">Statistics</h2>
+      <p class="text-center text-dark mb-4" th:inline="text">
+        [[${#temporals.format(statistics.localDateTime, 'EEE, MMM dd, yyyy HH:mm')}]]
+      </p>
+      <h5 th:text="|All cocktails: *{allCocktails}|"></h5>
+      <h5 th:text="|Whiskey cocktails: *{whiskeyCocktails}|"> </h5>
+      <h5 th:text="|Tequila cocktails: *{tequilaCocktails}|"> </h5>
+      <h5 th:text="|Gin cocktails: *{ginCocktails}|"> </h5>
+      <h5 th:text="|Rum cocktails: *{rumCocktails}|"> </h5>
+      <h5 th:text="|Vodka cocktails: *{vodkaCocktails}|"> </h5>
+      <h5 th:text="|Brandy cocktails: *{brandyCocktails}|"> </h5>
+      <h5 th:text="|Registered users: *{usersCount}|"> </h5>
+
+      <button class="btn btn-secondary mt-4" onclick="goBackOrHome()">Back</button>
+
+    </div>
+  </div>
+</div>
+
+
+<div>
+  <footer th:replace="~{fragments/commons::footer}"></footer>
+</div>
+
+<script th:src="@{/js/backButton.js}"></script>
+</body>
+</html>
