@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head th:replace="~{fragments/commons::head}"></head>
+
+<body>
+
+<header>
+  <nav th:replace="~{fragments/commons::navigation}"></nav>
+</header>
+<div class="container-fluid justify-content-center align-items-center px-4">
+  <div class="row">
+    <form th:action="@{/cocktails/search}"
+          th:method="GET"
+          th:object="${searchCocktailDto}"
+          class="col-sm-12 col-lg-10 mx-auto"
+          id="searchCocktailForm">
+
+      <h2 class="text-center text-dark my-4">Search cocktails</h2>
+
+      <div class="row px-3">
+        <div class="form-group col-sm-12 col-md-4  mx-0 px-2">
+          <label for="name" class="text-dark font-weight-bold">Cocktail name</label>
+          <input th:field="*{name}"
+                 th:errorclass="is-invalid"
+                 id="name"
+                 type="text"
+                 class="form-control"
+                 placeholder="Cocktail name"/>
+          <p th:each="err : ${#fields.errors('name')}"
+             th:text="${err}" id="inputNameError"
+             class="invalid-feedback text-danger mb-0">Cocktail name must be between 5 and 30
+            symbols!</p>
+        </div>
+        <div class="form-group col-sm-12 col-md-2  mx-0 px-2">
+          <label for="minPercentAlcohol" class="text-dark font-weight-bold">Min percent
+            alcohol</label>
+          <input th:field="*{minPercentAlcohol}"
+                 th:errorclass="is-invalid"
+                 id="minPercentAlcohol" type="number" min="0" max="480" step="1"
+                 class="form-control"
+                 placeholder="Min alcohol"/>
+          <p th:each="err : ${#fields.errors('minPercentAlcohol')}"
+             th:text="${err}"
+             class="invalid-feedback text-danger mb-0">
+            Enter percent alcohol.
+          </p>
+        </div>
+        <div class="form-group col-sm-12 col-md-2  mx-0 px-2">
+          <label for="maxPercentAlcohol" class="text-dark font-weight-bold">Max percent
+            alcohol</label>
+          <input th:field="*{maxPercentAlcohol}"
+                 th:errorclass="is-invalid"
+                 id="maxPercentAlcohol" type="number" min="0" max="480" step="1"
+                 class="form-control"
+                 placeholder="Max alcohol"/>
+          <p th:each="err : ${#fields.errors('maxPercentAlcohol')}"
+             th:text="${err}"
+             class="invalid-feedback text-danger mb-0">
+            Enter percent alcohol.
+          </p>
+        </div>
+        <div class="form-group col-sm-12 col-md-2  mx-0 px-2">
+          <label class="text-center text-dark font-weight-bold" for="hardnessLevel">Flavour</label>
+          <select th:field="*{flavour}"
+                  th:errorclass="is-invalid"
+                  id="hardnessLevel" class="form-control">
+            <option value="" selected>Select flavour</option>
+            <option
+                th:each="f : ${T(bg.example.craftyCocktails.model.entity.enums.FlavourEnum).values()}"
+                th:value="${f}"
+                th:text="${f}">Select flavour
+            </option>
+          </select>
+          <p class="invalid-feedback text-danger mb-0">
+            Flavour must be selected.
+          </p>
+        </div>
+        <div class="form-group col-sm-12 col-md-2  mx-0 px-1">
+          <label class="text-center text-dark font-weight-bold" for="spirit">Spirit</label>
+          <select th:field="*{spirit}"
+                  th:errorclass="is-invalid"
+                  id="spirit" class="form-control">
+            <option value="">Select spirit</option>
+            <option
+                th:each="s : ${T(bg.example.craftyCocktails.model.entity.enums.SpiritNameEnum).values()}"
+                th:value="${s}"
+                th:text="${s}">Select spirit
+            </option>
+          </select>
+          <p class="invalid-feedback text-danger mb-0">
+            Spirit must be selected.
+          </p>
+        </div>
+      </div>
+
+      <div class="row px-3 align-items-end">
+        <div class="form-group col-lg-10 m-0 px-2">
+          <label class="text-center text-dark font-weight-bold" for="spirit">Choose types</label>
+          <div class="container m-0 p-1">
+            <div class="row text-dark">
+              <div class="col-lg-2"
+                   th:each="t, iterStat : ${allTypes}">
+                <div class="form-check d-flex align-items-center">
+                  <input th:field="*{types}"
+                         th:value="${t}"
+                         class="form-check-input form-check-lg"
+                         type="checkbox"
+                         th:id="'check' + ${iterStat.index}">
+                  <label class="form-check-label text-dark"
+                         th:for="'check' + ${iterStat.index}"
+                         th:text="${#strings.capitalize(#strings.toLowerCase(t))}"></label>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-lg-2 pr-lg-0">
+          <div class="button-holder d-flex justify-content-end">
+            <input id="submitBtn" type="submit" class="btn btn-secondary btn-lg" value="Search"/>
+          </div>
+        </div>
+
+      </div>
+
+
+    </form>
+  </div>
+</div>
+
+<div
+    class="mx-5 my-3 py-2 px-3 border-custom title justify-content-center align-items-center bg-white">
+  <h4 class="text-center text-dark d-block">Results from searching criteria</h4>
+  <p class="text-center text-dark d-block pt-2 mb-1" th:text="${result}"></p>
+</div>
+
+<div class="card-group custom-padding">
+
+  <div th:each="c : ${cocktails}" th:object="${c}"
+       class="col-sm-12 col-md-6 col-lg-4 mb-4">
+    <div class="card h-100 border-0 shadow without-radius">
+      <img class="card-img-top without-radius" th:src="*{pictureUrl}" alt="Card image cap">
+      <div class="card-body">
+        <h5 th:text="*{name}"
+            class="card-title mb-0">Коктейл</h5>
+        <p th:text="|Добавена от: *{author}|"
+           class="card-text">Добавена от: Александра Милева</p>
+      </div>
+      <div class="card-footer">
+        <div class="d-flex flex-row">
+          <div class="col-3 p-2 text-center">
+            <p><i class="fa-regular fa-clock fa-2x"></i></p>
+            <p th:text="|*{percentAlcohol}|">13%</p>
+          </div>
+          <div class="col-3 p-2 text-center">
+            <p><i class="fa-solid fa-bowl-rice fa-2x"></i></p>
+            <p th:text="*{servings}">5</p>
+          </div>
+
+          <div th:switch="${c.spirit.name()}"
+               class="col-3 p-2 text-center">
+            <div th:case="'WHISKEY'">
+              <p><i class="fa-solid fa-drumstick-bite fa-2x"></i></p>
+              <p>Whiskey</p>
+            </div>
+            <div th:case="'TEQUILA'">
+              <p><i class="fa-solid fa-seedling fa-2x"></i></p>
+              <p>Tequila</p>
+            </div>
+            <div th:case="'GIN'">
+              <p><i class="fa-solid fa-egg fa-2x"></i></p>
+              <p>Gin</p>
+            </div>
+            <div th:case="'RUM'">
+              <p><i class="fa-solid fa-egg fa-2x"></i></p>
+              <p>Rum</p>
+            </div>
+            <div th:case="'VODKA'">
+              <p><i class="fa-solid fa-egg fa-2x"></i></p>
+              <p>Vodka</p>
+            </div>
+            <div th:case="'BRANDY'">
+              <p><i class="fa-solid fa-egg fa-2x"></i></p>
+              <p>Brandy</p>
+            </div>
+            <div th:case="'NONE'">
+              <p><i class="fa-solid fa-egg fa-2x"></i></p>
+              <p>Without alcohol</p>
+            </div>
+          </div>
+
+          <div class="col-3 p-2 text-center">
+            <p><i class="fa-solid fa-stairs fa-2x"></i></p>
+            <p th:text="*{#strings.capitalize(#strings.toLowerCase(flavour))}">Sweet</p>
+          </div>
+        </div>
+        <a th:href="@{/cocktails/details/{id}(id=*{id})}" class="btn btn-secondary btn-sm mb-2">Details</a>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<th:block th:if="${cocktails != null}">
+  <h5 th:if="${cocktails.isEmpty()}" class="text-sm-center text-white mx-5 mb-5"
+      th:text="|No results found for cocktails with ${result}|"></h5>
+
+  <th:block th:if="${not cocktails.isEmpty()}">
+    <nav th:replace="~{fragments/commons::pagination}"></nav>
+  </th:block>
+</th:block>
+
+
+<footer th:replace="~{fragments/commons::footer}"></footer>
+
+</body>
+</html>

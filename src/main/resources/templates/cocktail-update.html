@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head th:replace="~{fragments/commons::head}"></head>
+
+<body>
+
+<div>
+  <nav th:replace="~{fragments/commons::navigation}"></nav>
+</div>
+
+
+<div class="container-fluid justify-content-center align-items-center">
+  <div class="row">
+    <form th:action="@{/cocktails/edit/{id}(id=*{id})}"
+          th:method="put"
+          th:object="${editCocktailDto}"
+          class="col-sm-12 col-lg-6 mx-auto p-4">
+
+      <h2 class="text-center text-dark my-4">Update cocktail</h2>
+
+      <div class="form-group">
+        <label for="name" class="text-dark font-weight-bold">Cocktail name</label>
+        <input th:field="*{name}"
+               th:errorclass="is-invalid"
+               id="name"
+               type="text"
+               class="form-control shadow"
+               placeholder="Cocktail name"/>
+        <p th:each="err : ${#fields.errors('name')}"
+           th:text="${err}" id="inputNameError"
+           class="invalid-feedback text-danger mb-0">Cocktail name must be between 5 and 30
+          symbols!</p>
+      </div>
+
+      <div class="row">
+        <div class="form-group col-sm-12 col-md-6  mb-3">
+          <label for="percentAlcohol" class="text-dark font-weight-bold">Percent Alcohol</label>
+          <input th:field="*{percentAlcohol}"
+                 th:errorclass="is-invalid"
+                 id="percentAlcohol" type="number" min="0" max="480" step="1" class="form-control shadow"
+                 placeholder="Percent Alcohol"/>
+          <p th:each="err : ${#fields.errors('percentAlcohol')}"
+             th:text="${err}"
+             class="invalid-feedback text-danger mb-0">
+            Enter percent alcohol.
+          </p>
+        </div>
+        <div class="form-group col-sm-12 col-md-6  mb-3">
+          <label for="servings" class="text-dark font-weight-bold">Servings</label>
+          <input th:field="*{servings}"
+                 th:errorclass="is-invalid"
+                 id="servings" type="number" min="0" max="100" step="1" class="form-control shadow"
+                 placeholder="Servings"/>
+          <p th:each="err : ${#fields.errors('servings')}"
+             th:text="${err}"
+             class="invalid-feedback text-danger mb-0">
+            Enter number of servings.
+          </p>
+        </div>
+
+      </div>
+
+      <div class="row">
+        <div class="form-group col-sm-12 col-md-6  mb-3">
+          <label class="text-center text-dark font-weight-bold" for="flavour">Flavour</label>
+          <select th:field="*{flavour}"
+                  th:errorclass="is-invalid"
+                  id="flavour" class="form-control shadow">
+            <option value="">Select flavour</option>
+            <option
+                th:each="f : ${T(bg.example.craftyCocktails.model.entity.enums.FlavourEnum).values()}"
+                th:value="${f}"
+                th:text="${f}"
+                th:selected="${f} == *{flavour}">Select flavour
+            </option>
+          </select>
+          <p class="invalid-feedback text-danger mb-0">
+            Flavour must be selected.
+          </p>
+        </div>
+        <div class="form-group col-sm-12 col-md-6  mb-3">
+          <label class="text-center text-dark font-weight-bold" for="spirit">Spirit</label>
+          <select th:field="*{spirit}"
+                  th:errorclass="is-invalid"
+                  id="spirit" class="form-control shadow">
+            <option value="">Select spirit</option>
+            <option
+                th:each="s : ${T(bg.example.craftyCocktails.model.entity.enums.SpiritNameEnum).values()}"
+                th:value="${s}"
+                th:text="${s}"
+                th:selected="${s} == *{spirit}">Select Spirit
+            </option>
+          </select>
+          <p class="invalid-feedback text-danger mb-0">
+            Spirit must be selected.
+          </p>
+        </div>
+      </div>
+
+
+      <div class="form-group">
+        <label class="text-center text-dark font-weight-bold" for="spirit">Choose types</label>
+
+        <div class="container m-0 p-1">
+          <div class="row text-dark">
+            <div class="col-lg-3" th:each="t, iterStat : ${allTypes}">
+              <div class="form-check d-flex align-items-center">
+                <input th:field="*{types}"
+                       th:value="${t}"
+                       class="form-check-input form-check-lg"
+                       type="checkbox"
+                       th:id="'check' + ${iterStat.index}"
+                       th:checked="${editCocktailDto.types.contains(t)}">
+                <label class="form-check-label text-dark" th:for="'check' + ${iterStat.index}"
+                       th:text="${#strings.capitalize(#strings.toLowerCase(t))}"></label>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+
+      <div class="form-group">
+        <label class="text-dark font-weight-bold" for="ingredients">Ingredients</label>
+        <textarea th:field="*{ingredients}"
+                  th:errorclass="is-invalid"
+                  id="ingredients" type="textarea" class="form-control shadow" rows="3"
+                  placeholder="Ingredients"></textarea>
+        <p th:each="err : ${#fields.errors('ingredients')}"
+           th:text="${err}"
+           class="invalid-feedback text-danger">
+          List of ingredients is required.
+        </p>
+      </div>
+
+      <div class="form-group">
+        <label class="text-dark font-weight-bold" for="preparation">Preparation</label>
+        <textarea th:field="*{preparation}"
+                  th:errorclass="is-invalid"
+                  id="preparation" type="textarea" class="form-control shadow" rows="3"
+                  placeholder="Preparation"></textarea>
+        <p th:each="err : ${#fields.errors('preparation')}"
+           th:text="${err}"
+           class="invalid-feedback text-danger">
+          Preparation is required.
+        </p>
+      </div>
+
+      <div class="form-group">
+        <label class="text-dark font-weight-bold" for="videoUrl">Video URL</label>
+        <input th:field="*{videoUrl}"
+               th:errorclass="is-invalid"
+               id="videoUrl" type="url" class="form-control shadow"
+               placeholder="Put cocktail video URL here">
+        <p class="invalid-feedback text-danger">
+          Cocktail video URL is required.
+        </p>
+      </div>
+
+      <div class="row mb-5">
+        <div class="col-md-4">
+          <div class="button-holder d-flex">
+            <input type="submit" class="btn btn-secondary btn-md shadow" value="Update cocktail"/>
+          </div>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>
+
+<div>
+  <footer th:replace="~{fragments/commons::footer}"></footer>
+</div>
+
+<script src="/js/submitCocktail.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,337 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+
+<head th:replace="~{fragments/commons::head}"></head>
+
+<body>
+
+<div id="overlay">
+  <div id="spinner" class="spinner-border text-light" style="width: 3rem; height: 3rem;"
+       role="status">
+    <span class="sr-only">Loading...</span>
+  </div>
+</div>
+
+<header>
+  <nav th:replace="~{fragments/commons::navigation}"></nav>
+</header>
+
+<input type="hidden" name="cocktailId" id="cocktailId" th:value="${cocktail.id}">
+<div th:object="${cocktail}"
+     class="container-fluid">
+
+  <!-- Row 1 -->
+  <div class="row mx-lg-4 p-4 mx-1 mt-2">
+
+    <!-- column 1 -->
+    <div class="col-sm-12 col-lg-6 pt-2 px-0">
+      <div class="row mx-0">
+
+        <!-- Main image -->
+        <div class="col-12 px-0">
+          <div class="main-image position-relative shadow">
+            <button id="prevButton" class="btn btn-light btn-sm prev"><i
+                class="fas fa-chevron-left"></i></button>
+            <button id="nextButton" class="btn btn-light btn-sm next"><i
+                class="fas fa-chevron-right"></i></button>
+            <img id="mainImage" class="d-block w-100" alt="Main Image">
+            <button id="deleteImg" class="btn btn-danger btn-sm" data-toggle="modal"
+                    data-target="#deletePicModal">
+              <i class="fas fa-trash-alt"></i> Delete
+            </button>
+            <div class="modal fade"
+                 id="deletePicModal"
+                 tabindex="-1"
+                 role="dialog"
+                 aria-labelledby="exampleModalCenterTitle"
+                 aria-hidden="true">
+              <div class="modal-dialog modal-dialog-centered" role="document">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <h5 class="modal-title text-dark" id="deletePicTitle">Picture deletion</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                      <span aria-hidden="true">&times;</span>
+                    </button>
+                  </div>
+                  <div class="modal-body">
+                    <p class="text-dark">Are you sure you want to delete this picture?</p>
+                  </div>
+                  <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close
+                    </button>
+                    <form id="deleteMainImageForm"
+                          th:action="@{/cocktails/details/{cocktailId}/picture/delete(cocktailId = ${cocktail.id})}"
+                          th:method="delete">
+                      <input type="hidden" name="cocktailId" th:value="${cocktail.id}">
+                      <input type="hidden" name="pictureId" id="mainPictureId">
+                      <input type="submit" class="btn btn-secondary" value="Delete"
+                             id="deleteMainImageButton"/>
+                    </form>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- EO: Main image -->
+
+        <!-- List of other Images -->
+        <div class="col-12 px-0">
+          <div class="small-images shadow mt-3 d-flex overflow-auto bg-white">
+            <div th:each="p, index : *{pictures}">
+              <img th:src="${p.url}"
+                   th:data-picture-id="${p.id}"
+                   th:data-can-not-delete="${p.canNotDelete}" alt="Image 1">
+            </div>
+          </div>
+        </div>
+        <!-- EO:List of other Images -->
+      </div>
+    </div>
+    <!-- EO: column 1 -->
+
+    <!-- column 2 -->
+    <div class="col-sm-12 col-lg-6 p-0 pl-lg-5 pl-2">
+
+      <h2 th:text="*{name}" class="text-left">Cocktail title</h2>
+      <p th:text="|Добавено от : *{author}|" class="text-left"></p>
+      <!-- Buttons -->
+      <div class="col-12 mb-2 px-0">
+        <div class="action">
+          <th:block sec:authorize="isAuthenticated()">
+
+            <!-- favourite -->
+            <form id="favoritesForm"
+                  th:action="@{/api/cocktails/{cocktailId}/addOrRemoveFromFavorites(cocktailId=${cocktail.id})}"
+                  method="POST"
+                  class="d-inline-block">
+              <button id="addOrRemoveButton"
+                      class="btn btn-success btn-sm mt-2 mr-1 mb-0 ml-0 d-inline-block"
+                      onclick="addOrRemoveFromFavorites()">
+                <i id="favoriteIcon"
+                   th:classappend="${cocktail.isFavorite ? 'fas fa-solid fa-star' : 'fas fa-regular fa-star'}"></i>
+                <span id="favoriteText"
+                      th:text="${cocktail.isFavorite ? 'Unavorite' : 'Favorite'}"></span>
+              </button>
+            </form>
+            <!-- EO: favourite -->
+
+            <!-- add pic -->
+            <form th:object="${uploadPictureDto}"
+                  th:action="@{'/cocktails/details/' + ${cocktail.id} + '/picture/add'}"
+                  th:method="post"
+                  enctype="multipart/form-data" id="uploadForm"
+                  class="d-inline-block">
+              <div class="form-group m-0">
+                <input th:field="*{cocktailId}" type="hidden" th:value="${cocktail.id}"
+                       name="cocktailId"/>
+              </div>
+              <div class="image-upload">
+                <label for="picture" class="mb-0">
+                  <p class="btn btn-info btn-sm mt-2 mr-1 mb-0 ml-0 d-inline-block"
+                     id="addPhotoButton"><i class="fas fa-regular fa-image"></i> Add Photo</p>
+                </label>
+                <input th:field="*{picture}" style="display: none" id="picture" type="file"
+                       name="picture"
+                       onchange="validateAndUploadFile()" accept="image/*"/>
+              </div>
+            </form>
+            <!-- EO: add pic -->
+          </th:block>
+
+          <th:block th:if="*{canDelete}">
+
+            <!-- delete -->
+            <button class="btn btn-danger btn-sm mt-2 mr-1 mb-0 ml-0 d-inline-block"
+                    data-toggle="modal" data-target="#exampleModalCenter">
+              <i class="fas fa-solid fa-trash"></i> Delete cocktail
+            </button>
+
+            <a th:href="@{/cocktails/edit/{id}(id=*{id})}"
+               class="btn btn-info btn-sm mt-2 mb-0 ml-0 d-inline-block"><i
+                class="fa-solid fa-pen"></i> Update cocktail</a>
+
+            <!-- Modal -->
+            <div class="modal fade"
+                 id="exampleModalCenter"
+                 tabindex="-1"
+                 role="dialog"
+                 aria-labelledby="exampleModalCenterTitle"
+                 aria-hidden="true">
+              <div class="modal-dialog modal-dialog-centered" role="document">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <h5 class="modal-title text-dark" id="exampleModalLongTitle">Cocktail
+                      deletion</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                      <span aria-hidden="true">&times;</span>
+                    </button>
+                  </div>
+                  <div class="modal-body">
+                    <p class="text-dark">Are you sure you want to delete this cocktail?</p>
+                  </div>
+                  <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close
+                    </button>
+                    <!-- Modify the form to trigger the modal -->
+                    <form th:action="@{/cocktails/delete/{id}(id=*{id})}"
+                          th:method="delete"
+                          class="d-inline-block"
+                          onsubmit="showDeleteSpinner(event)">
+                      <input class="btn btn-secondary" type="submit" value="Delete">
+                    </form>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <!-- EO: delete -->
+          </th:block>
+        </div>
+      </div>
+      <!-- EO: Buttons -->
+
+      <div class="embed-responsive embed-responsive-1by1 m-0 shadow">
+        <iframe id="frame" th:src="'https://www.youtube.com/embed/' + *{videoId}">
+        </iframe>
+      </div>
+
+    </div>
+    <!-- EO: column 2 -->
+  </div>
+  <!-- EO: Row 1 -->
+
+  <!-- Row 2 -->
+  <div class="row mx-lg-4 p-4 mx-1">
+
+    <!-- Column 4 -->
+    <div class="col-sm-12 col-lg-6 p-0">
+      <!-- Haracteristics -->
+      <div class="col-12 mt-3 mt-lg-0 mb-2 p-0">
+        <div class="bg-white shadow h-100 p-3">
+
+          <h2 class="mb-3">Характеристики</h2>
+
+          <ul class="custom-list">
+            <li th:text="|Алкохол: *{percentAlcohol}%|"></li>
+            <li th:text="|Порции: *{servings}|"></li>
+            <li>
+              <div th:switch="${cocktail.spirit.name()}">
+                <div th:case="'WHISKEY'">
+                  <p>Уиски</p>
+                </div>
+                <div th:case="'TEQUILA'">
+                  <p>Текила</p>
+                </div>
+                <div th:case="'GIN'">
+                  <p>Джин</p>
+                </div>
+                <div th:case="'RUM'">
+                  <p>Ром</p>
+                </div>
+                <div th:case="'VODKA'">
+                  <p>Водка</p>
+                </div>
+                <div th:case="'BRANDY'">
+                  <p>Бренди</p>
+                </div>
+                <div th:case="'NONE'">
+                  <p>Без алкохол</p>
+                </div>
+              </div>
+            </li>
+          </ul>
+
+        </div>
+      </div>
+      <!-- EO: Haracteristics -->
+
+      <!-- Products -->
+      <div class="col-12 mt-3 mt-lg-0 p-0">
+        <div class="bg-white shadow p-3 h-100">
+          <h2 class="mb-3">Продукти</h2>
+          <ul th:each="ing : *{ingredients}" class="custom-list">
+            <li th:text="${ing}"></li>
+          </ul>
+        </div>
+      </div>
+      <!-- EO: Products -->
+    </div>
+    <!-- EO: Column 4 -->
+
+    <!-- Column 3 -->
+    <div class="col-sm-12 col-lg-6 pl-lg-5 pl-2">
+
+      <div class="shadow bg-white p-3">
+        <h2>Начин на приготвяне</h2>
+        <p th:text="*{preparation}"></p>
+      </div>
+    </div>
+    <!-- EO: Column 3 -->
+  </div>
+  <!-- EO: Row 2 -->
+
+  <!-- Row 3 -->
+  <div class="row mx-lg-4 mx-1 mb-5">
+    <div class="col-12 p-4">
+      <section class="comments bg-white p-4 shadow">
+        <h1>Comments</h1>
+
+        <div>
+          <!-- Comments submission -->
+          <form id="commentForm" method="POST"
+                th:action="@{/api/{cocktailId}/comments(cocktailId=${cocktail.id})}">
+            <div class="form-group">
+              <h4>Leave a comment: </h4>
+              <textarea name="message"
+                        id="message"
+                        cols="30"
+                        rows="5"
+                        class="form-control"
+                        style="background-color: white;"></textarea>
+              <small id="messageError" class="invalid-feedback">
+                Message should be at least 10 characters.
+              </small>
+            </div>
+
+            <div th:if="${not #authorization.expression('isAuthenticated()')}">
+              <p class="text-danger font-italic">**Only logged users can post comments.</p>
+            </div>
+
+            <div class="form-group">
+              <input type="submit"
+                     class="btn btn-secondary btn-sm"
+                     th:disabled="${not #authorization.expression('isAuthenticated()')}"
+                     id="postComment"
+                     value="Post Comment"/>
+            </div>
+          </form>
+          <!-- Comments submission -->
+        </div>
+
+        <!-- All comments section -->
+        <div>
+
+          <span id="commentCtnr"><!-- Comments section, filled in by script --></span>
+        </div>
+        <!-- EO: All comments section -->
+      </section>
+
+    </div>
+  </div>
+</div>
+</div>
+<!-- EO: Row 3 -->
+
+
+<script th:src="@{/js/comments.js}"></script>
+<script th:src="@{/js/favorites.js}"></script>
+<script th:src="@{/js/updateOrDeleteCocktail.js}"></script>
+</div>
+<!-- EO: Main -->
+
+<footer th:replace="~{fragments/commons::footer}"></footer>
+
+</body>
+
+</html>
