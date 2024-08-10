@@ -30,7 +30,7 @@ public class HomeController {
     return "index";
   }
 
-  @Scheduled(cron = "0 0 0,16 * * ?") // Execute at 00:00, 16:00 every day
+  @Scheduled(cron = "${home.page.cron}")
   public void scheduleInitHomePageDto() {
     homePageDto = homePageService.initHomePageDto();
   }

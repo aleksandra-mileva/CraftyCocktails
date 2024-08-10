@@ -8,121 +8,62 @@
 <body>
 
 <div>
-        <nav th:replace="~{fragments/commons::navigation}"></nav>
+  <nav th:replace="~{fragments/commons::navigation}"></nav>
 </div>
 
 <div class="container-fluid">
-    <div class="row mx-0 mx-lg-2 mt-0 bg-custom border-custom py-4 px-3">
+  <div class="row mx-0 mx-lg-2 mt-0 py-4 px-3 justify-content-center">
 
-        <!-- Carousel -->
-        <div class="col-sm-12 col-lg-8 mx-0 px-2">
-            <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
-                <ol class="carousel-indicators">
-                    <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
-                    <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
-                    <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
-                </ol>
-                <div class="carousel-inner">
-                    <div th:each="picture, status : ${pictures}" th:object="${picture}"
-                         th:classappend="${status.index == 0} ? 'active' : ''"
-                         class="carousel-img carousel-item">
-                        <div class="carousel-img image-overlay d-flex align-content-center justify-content-center">
-                            <img th:src="${picture.url}" class="align-middle" alt="...">
-                            <div class="overlay"></div>
-                        </div>
-                        <div class="carousel-caption">
-                            <h2 th:text="${message}" class="text-left"></h2>
-                            <p th:text="'Picture added by: ' + ${picture.authorFullName}" class="font-italic text-left"></p>
-                            <p class="text-md-left"><a th:href="@{/cocktails/details/{cocktailId}(cocktailId=${picture.cocktailId})}">View the cocktail</a></p>
-                        </div>
-                    </div>
-                </div>
-                <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
-                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                    <span class="sr-only">Previous</span>
-                </a>
-                <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
-                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                    <span class="sr-only">Next</span>
-                </a>
-            </div>
-
-        </div>
-
-
-
-        <!-- EO: Images -->
-
-        <!-- Meal info -->
-        <div class="col-sm-12 col-lg-4 px-4 d-flex align-items-center justify-content-center">
-
-
-            <div class="row">
-
-                <div class="col-12 py-3 text-center">
-                    <h2 class="fs-sm fs-md">Welcome to CraftyCocktails!</h2>
-                </div>
-
-                <div class="col-12">
-                    <div class="row border-custom bg-custom">
-                        <div class="col-4 col-lg-6 p-0  d-flex justify-content-center">
-                            <div class="round-image m-3">
-                                <a th:href="@{/cocktails/whiskey}">
-                                    <img src="/images/meat.png" alt="">
-                                </a>
-                            </div>
-                        </div>
-                        <div class="col-8 col-lg-6 d-flex justify-content-center align-items-center">
-                            <p class="text-center fs-md fs-sm">
-                                <a th:href="@{/cocktails/whiskey}" style="text-decoration: none; color: white; font-style: italic;">Коктейли с <br class="hide-on-small-screen">уиски</a></p>
-                        </div>
-                    </div>
-                </div>
-
-
-
-                <div class="col-12">
-                    <div class="row border-custom bg-custom">
-                        <div class="col-4 col-lg-6 p-0  d-flex justify-content-center">
-                            <div class="round-image m-3">
-                                <a th:href="@{/cocktails/tequila}">
-                                    <img src="/images/vegetarian.png" alt="">
-                                </a>
-                            </div>
-                        </div>
-                        <div class="col-8 col-lg-6 d-flex justify-content-center align-items-center">
-                            <p class="text-center fs-md fs-sm">
-                                <a th:href="@{/cocktails/tequila}" style="text-decoration: none; color: white; font-style: italic; word-break: break-all;">Коктейли с <br>текила</a></p>
-                        </div>
-                    </div>
-                </div>
-
-
-
-                <div class="col-12">
-                    <div class="row border-custom bg-custom">
-                        <div class="col-4 col-lg-6 p-0  d-flex justify-content-center">
-                            <div class="round-image m-3">
-                                <a th:href="@{/cocktails/gin}">
-                                    <img src="/images/vegan.png" alt="">
-                                </a>
-                            </div>
-                        </div>
-                        <div class="col-8 col-lg-6 d-flex justify-content-center align-items-center">
-                            <p class="text-center fs-md fs-sm">
-                                <a th:href="@{/cocktails/gin}" style="text-decoration: none; color: white; font-style: italic;">Коктейли с <br class="hide-on-small-screen">джин</a></p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <!-- EO: Meal info -->
+    <div class="col-12 py-3 text-center">
+      <h1 class="fs-sm fs-md .display-6">Welcome to CraftyCocktails!</h1>
     </div>
-    <!-- EO: Row 1 -->
+
+    <!-- Carousel -->
+    <div class="col-sm-12 col-lg-8 mx-0 px-2">
+      <div id="carouselExampleIndicators" class="carousel slide carousel-fade" data-ride="carousel">
+        <ol class="carousel-indicators">
+          <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
+          <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
+          <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
+        </ol>
+        <div class="carousel-inner shadow">
+          <div th:each="picture, status : ${pictures}" th:object="${picture}"
+               th:classappend="${status.index == 0} ? 'active' : ''"
+               class="carousel-img carousel-item">
+            <div
+                class="carousel-img image-overlay d-flex align-content-center justify-content-center">
+              <img th:src="${picture.url}" class="align-middle" alt="...">
+              <div class="overlay"></div>
+            </div>
+            <div class="carousel-caption">
+              <h2 th:text="${message}" class="text-left"></h2>
+              <p th:text="'Picture added by: ' + ${picture.authorFullName}"
+                 class="font-italic text-left"></p>
+              <p class="text-md-left"><a
+                  th:href="@{/cocktails/details/{cocktailId}(cocktailId=${picture.cocktailId})}">View
+                the cocktail</a></p>
+            </div>
+          </div>
+        </div>
+        <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button"
+           data-slide="prev">
+          <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+          <span class="sr-only">Previous</span>
+        </a>
+        <a class="carousel-control-next" href="#carouselExampleIndicators" role="button"
+           data-slide="next">
+          <span class="carousel-control-next-icon" aria-hidden="true"></span>
+          <span class="sr-only">Next</span>
+        </a>
+      </div>
+
+    </div>
+    <!-- EO: Carousel -->
+  </div>
 </div>
 
 <div class="mt-4">
-    <footer th:replace="~{fragments/commons::footer}"></footer>
+  <footer th:replace="~{fragments/commons::footer}"></footer>
 </div>
 
 </body>

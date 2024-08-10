@@ -21,3 +21,7 @@ mail:
 site:
   base:
     url: http://localhost:8080
+
+home:
+  page:
+    cron: -

@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+
+<head th:fragment = "head">
+    <meta name="_csrf" th:content="${_csrf.token}"/>
+    <meta name="_csrf_header" th:content="${_csrf.headerName}"/>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>Cocktail Website</title>
+    <link rel="stylesheet" href="/css/reset-css.css" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous">
+    <link rel="stylesheet" type="text/css" href="/css/main.css" />
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+            integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+            crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js"
+            integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+            crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js"
+            integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+            crossorigin="anonymous"></script>
+    <script src="/js/script.js"></script>
+</head>
+
+<body>
+
+<nav th:fragment = "navigation" class="navbar navbar-expand-lg shadow navbar-light bg-white fixed-top py-0">
+    <a class="navbar-brand" href="/"><img alt="car picture"
+                                          th:src="@{/images/logo.png}"
+                                          class="logo">
+    </a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse pl-lg-5 ml-lg-5" id="navbarSupportedContent">
+        <ul class="navbar-nav mr-auto col-12 justify-content-between">
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" id="cocktailsDropdown" role="button" data-toggle="dropdown"
+                   aria-haspopup="true" aria-expanded="false" th:text="#{navbar_cocktails}">
+                    Cocktails
+                </a>
+                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                    <a class="dropdown-item" th:href="@{/cocktails/all}" th:text="#{navbar_all_cocktails}">All cocktails</a>
+                    <div class="dropdown-divider"></div>
+                    <a class="dropdown-item" th:href="@{/cocktails/whiskey}" th:text="#{navbar_whiskey_cocktails}">Whiskey cocktails</a>
+                    <div class="dropdown-divider"></div>
+                    <a class="dropdown-item" th:href="@{/cocktails/tequila}" th:text="#{navbar_tequila_cocktails}">Tequila cocktails</a>
+                    <div class="dropdown-divider"></div>
+                    <a class="dropdown-item" th:href="@{/cocktails/gin}" th:text="#{navbar_gin_cocktails}">Gin cocktails</a>
+                    <div class="dropdown-divider"></div>
+                    <a class="dropdown-item" th:href="@{/cocktails/rum}" th:text="#{navbar_rum_cocktails}">Rum cocktails</a>
+                    <div class="dropdown-divider"></div>
+                    <a class="dropdown-item" th:href="@{/cocktails/vodka}" th:text="#{navbar_vodka_cocktails}">Vodka cocktails</a>
+                    <div class="dropdown-divider"></div>
+                    <a class="dropdown-item" th:href="@{/cocktails/brandy}" th:text="#{navbar_brandy_cocktails}">Brandy cocktails</a>
+                    <div class="dropdown-divider"></div>
+                    <a class="dropdown-item" th:href="@{/cocktails/non-alcoholic}" th:text="#{navbar_non-alcoholic_cocktails}">Non-alcoholic cocktails</a>
+                </div>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" th:text="#{navbar_search}" href="/cocktails/search">Search</a>
+            </li>
+            <li class="nav-item" sec:authorize="isAuthenticated()">
+                <a class="nav-link" th:text="#{navbar_add_cocktail}" href="/cocktails/add">Add cocktail</a>
+            </li>
+            <li class="nav-item dropdown" sec:authorize="isAuthenticated()">
+                <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown"
+                   aria-haspopup="true" aria-expanded="false" th:text="#{navbar_user}">
+                    User
+                </a>
+                <div class="dropdown-menu" aria-labelledby="navbarDropdown"  sec:authorize="isAuthenticated()">
+                    <a class="dropdown-item" th:href="@{/users/profile/{id}(id=${#authentication.principal.id})}" th:text="#{navbar_user_profile}">Profile</a>
+                    <div class="dropdown-divider"></div>
+                    <a class="dropdown-item" th:href="@{/users/profile/{id}/addedCocktails(id=${#authentication.principal.id})}" th:text="#{navbar_user_addedCocktails}">My cocktails</a>
+                    <div class="dropdown-divider"></div>
+                    <a class="dropdown-item" th:href="@{/users/profile/{id}/addedPictures(id=${#authentication.principal.id})}" th:text="#{navbar_user_addedPics}">My photos</a>
+                    <div class="dropdown-divider"></div>
+                    <a class="dropdown-item" th:href="@{/users/profile/{id}/favoriteCocktails(id=${#authentication.principal.id})}" th:text="#{navbar_user_favorites}">Favorite cocktails</a>
+                </div>
+            </li>
+            <li class="nav-item dropdown" sec:authorize="hasRole('ADMIN')">
+                <a class="nav-link dropdown-toggle" href="#" id="adminDropdown" role="button" data-toggle="dropdown"
+                   aria-haspopup="true" aria-expanded="false" th:text="#{navbar_admin}">
+                    User
+                </a>
+                <div class="dropdown-menu" aria-labelledby="navbarDropdown"  sec:authorize="isAuthenticated()">
+                    <a class="dropdown-item" th:href="@{/statistics}" th:text="#{navbar_admin_statistics}">Statistics</a>
+                </div>
+            </li>
+            <li class="nav-item" sec:authorize="isAuthenticated()">
+                <div class="form-inline my-2 my-lg-0 px-3">
+                    <div class="logged-user text-dark"
+                         th:text="#{navbar_welcome(${#authentication.principal.fullName})}">
+                    </div>
+                    <form th:action="@{/users/logout}" th:method="post">
+                        <input class="btn btn-link nav-link" type="submit" th:value="#{navbar_logout}">
+                    </form>
+                </div>
+            </li>
+            <th:block sec:authorize="!isAuthenticated()">
+                <li class="nav-item">
+                    <a class="nav-link" th:text="#{navbar_register}" th:href="@{/users/register}">Register</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" th:text="#{navbar_login}" th:href="@{/users/login}">Login</a>
+                </li>
+            </th:block>
+            <li class="nav-item d-flex align-items-center">
+                <form th:method="get" class="d-flex align-items-center">
+                    <label class="text-dark mr-2 mb-0" th:text="#{navbar_language}" for="lang"></label>
+                    <select class="bg-white border-custom text-dark p-1"
+                            onchange="this.form.submit()"
+                            id="lang"
+                            name="lang">
+                        <option value="en_US" th:selected="${#locale.toString()} == 'en_US'">English</option>
+                        <option value="bg_BG" th:selected="${#locale.toString()} == 'bg_BG'">Български</option>
+                    </select>
+                </form>
+            </li>
+        </ul>
+    </div>
+</nav>
+
+<nav  th:fragment = "pagination">
+    <ul class="pagination justify-content-center">
+        <li class="page-item" th:classappend="${cocktails.hasPrevious() ? '' : 'disabled'}">
+            <a th:if="${cocktails.hasPrevious()}"
+               th:href="@{${url}(size=${cocktails.getSize()},page=${cocktails.getNumber() - 1})}"
+               class="page-link" href="#">
+                <span aria-hidden="true">&laquo;</span>
+                <span class="sr-only">Previous</span>
+            </a>
+            <a th:unless="${cocktails.hasPrevious()}"
+               class="page-link" href="#">
+                <span aria-hidden="true">&laquo;</span>
+                <span class="sr-only">Previous</span>
+            </a>
+        <li class="page-item" th:each="page : ${#numbers.sequence(0, cocktails.getTotalPages()-1)}"
+            th:classappend="${page == cocktails.getNumber() ? 'disabled' : ''}">
+            <a th:unless="${page == cocktails.getNumber()}"
+               th:href="@{${url}(size=${cocktails.getSize()},page=${page})}"
+               class="page-link" href="#"
+               th:text="${page + 1}">Number</a>
+            <span th:if="${page == cocktails.getNumber()}" class="page-link" th:text="${page + 1}">Number</span>
+        </li>
+        <li class="page-item" th:classappend="${cocktails.hasNext() ? '' : 'disabled'}">
+            <a th:if="${cocktails.hasNext()}"
+               th:href="@{${url}(size=${cocktails.getSize()},page=${cocktails.getNumber() + 1})}"
+               class="page-link" href="#">
+                <span aria-hidden="true">&raquo;</span>
+                <span class="sr-only">Next</span>
+            </a>
+            <a th:unless="${cocktails.hasNext()}"
+               class="page-link" href="#">
+                <span aria-hidden="true">&raquo;</span>
+                <span class="sr-only">Next</span>
+            </a>
+        </li>
+    </ul>
+</nav>
+
+
+<footer th:fragment="footer" class="bg-dark text-center text-white">
+    <!-- Grid container -->
+    <div class="container p-4 pb-0">
+        <!-- Section: Social media -->
+        <section class="mb-4">
+            <!-- Facebook -->
+            <a class="btn btn-outline-light btn-floating m-1"
+               href="https://www.facebook.com" target="_blank" role="button"
+            ><i class="fab fa-facebook-f"></i
+            ></a>
+
+            <!-- GoogleMail -->
+            <a href="mailto:aleksandramileva96@gmail.com" target="_blank" rel="noopener noreferrer"
+                    class="btn btn-outline-light btn-floating m-1" role="button"
+            ><i class="fa-regular fa-envelope"></i></a>
+
+            <!-- Linkedin -->
+            <a class="btn btn-outline-light btn-floating m-1" href="https://www.linkedin.com" target="_blank" role="button">
+                <i class="fab fa-linkedin-in"></i>
+            </a>
+
+            <!-- Github -->
+            <a class="btn btn-outline-light btn-floating m-1" href="https://github.com" target="_blank" role="button"
+            ><i class="fab fa-github"></i
+            ></a>
+        </section>
+        <!-- Section: Social media -->
+    </div>
+    <!-- Grid container -->
+
+    <!-- Copyright -->
+    <div class="text-center p-3" style="background-color: rgba(0, 0, 0, 0.2);">
+        © 2024 Copyright:
+        <span class="text-white">Aleksandra Mileva</span>
+    </div>
+    <!-- Copyright -->
+</footer>
+
+</body>
+
+</html>

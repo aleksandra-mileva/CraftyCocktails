@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head th:replace="~{fragments/commons::head}"></head>
+
+<body>
+
+    <header>
+        <nav th:replace="~{fragments/commons::navigation}"></nav>
+    </header>
+
+    <div class="container-fluid">
+
+        <div class="row mb-2 text-dark">
+            <h3 class="text-center m-auto py-3" th:text="${heading}">All cocktails</h3>
+        </div>
+
+        <div class="card-group custom-padding">
+
+            <div th:each="c : ${cocktails}" th:object="${c}"
+                 class="col-sm-12 col-md-6 col-lg-4 mb-4">
+                <div class="card h-100 border-0 shadow without-radius">
+                    <img class="card-img-top without-radius" th:src="*{pictureUrl}" alt="Card image cap">
+                    <div class="card-body">
+                      <h5 th:text="*{name}"
+                              class="card-title mb-0">Коктейл</h5>
+                      <p th:text="|Добавена от: *{author}|"
+                         class="card-text">Добавена от: Александра Милева</p>
+                    </div>
+                    <div class="card-footer bg-white">
+                        <div class="d-flex flex-row">
+                            <div class="col-3 p-2 text-center">
+                                <p><i class="fa-regular fa-clock fa-2x"></i></p>
+                                <p th:text="|*{percentAlcohol}%|">13%</p>
+                            </div>
+                            <div class="col-3 p-2 text-center">
+                                <p><i class="fa-solid fa-bowl-rice fa-2x"></i></p>
+                                <p th:text="*{servings}">5</p>
+                            </div>
+                            <div th:switch="${c.spirit.name()}"
+                                    class="col-3 p-2 text-center">
+                                <div th:case="'WHISKEY'">
+                                    <p><i class="fa-solid fa-drumstick-bite fa-2x"></i></p>
+                                    <p>Whiskey</p>
+                                </div>
+                                <div th:case="'TEQUILA'">
+                                    <p><i class="fa-solid fa-seedling fa-2x"></i></p>
+                                    <p>Tequila</p>
+                                </div>
+                                <div th:case="'GIN'">
+                                    <p><i class="fa-solid fa-egg fa-2x"></i></p>
+                                    <p>Gin</p>
+                                </div>
+                                <div th:case="'RUM'">
+                                    <p><i class="fa-solid fa-egg fa-2x"></i></p>
+                                    <p>Rum</p>
+                                </div>
+                                <div th:case="'VODKA'">
+                                    <p><i class="fa-solid fa-egg fa-2x"></i></p>
+                                    <p>Vodka</p>
+                                </div>
+                                <div th:case="'BRANDY'">
+                                    <p><i class="fa-solid fa-egg fa-2x"></i></p>
+                                    <p>Brandy</p>
+                                </div>
+                                <div th:case="'NONE'">
+                                    <p><i class="fa-solid fa-egg fa-2x"></i></p>
+                                    <p>Without alcohol</p>
+                                </div>
+                            </div>
+                            <div class="col-3 p-2 text-center">
+                                <p><i class="fa-solid fa-stairs fa-2x"></i></p>
+                                <p th:text="*{#strings.capitalize(#strings.toLowerCase(flavour))}">Sweet</p>
+                            </div>
+                        </div>
+                        <a th:href="@{/cocktails/details/{id}(id=*{id})}" class="btn btn-secondary btn-sm mb-2">Details</a>
+                    </div>
+                  </div> 
+            </div>
+        </div>
+
+
+    </div>
+
+    <th:block th:if="${not cocktails.isEmpty()}">
+        <nav th:replace="~{fragments/commons::pagination}"></nav>
+    </th:block>
+
+
+    <footer th:replace="~{fragments/commons::footer}"></footer>
+
+</body>
+
+</html>
