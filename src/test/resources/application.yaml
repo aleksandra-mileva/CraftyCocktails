@@ -22,6 +22,10 @@ site:
   base:
     url: http://localhost:8080
 
+fortuneservice:
+  base:
+    url: http://localhost:8081/fortune-service
+
 home:
   page:
-    cron: -
+    cron: "0 0 0,16 * * ?"
