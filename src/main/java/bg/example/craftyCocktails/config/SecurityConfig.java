@@ -34,7 +34,7 @@ public class SecurityConfig {
         .antMatchers("/", "/cocktails/**", "/api/**", "/maintenance/**").permitAll()
         .antMatchers("/users/register/**", "/users/login", "/password/**").anonymous()
         .antMatchers("/users/profile", "/cocktails/add", "/users/profile/**").authenticated()
-        .antMatchers("/statistics").hasRole(RoleNameEnum.ADMIN.name())
+        .antMatchers("/statistics", "/fortunes", "/fortunes/**").hasRole(RoleNameEnum.ADMIN.name())
         .anyRequest()
         .authenticated()
         .and()

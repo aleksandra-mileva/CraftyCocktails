@@ -213,33 +213,32 @@
           <h2 class="mb-3">Характеристики</h2>
 
           <ul class="custom-list">
-            <li th:text="|Алкохол: *{percentAlcohol}%|"></li>
-            <li th:text="|Порции: *{servings}|"></li>
-            <li>
-              <div th:switch="${cocktail.spirit.name()}">
+            <li th:switch="${cocktail.spirit.name()}">
                 <div th:case="'WHISKEY'">
-                  <p>Уиски</p>
+                  Уиски
                 </div>
                 <div th:case="'TEQUILA'">
-                  <p>Текила</p>
+                  Текила
                 </div>
                 <div th:case="'GIN'">
-                  <p>Джин</p>
+                  Джин
                 </div>
                 <div th:case="'RUM'">
-                  <p>Ром</p>
+                  Ром
                 </div>
                 <div th:case="'VODKA'">
-                  <p>Водка</p>
+                  Водка
                 </div>
                 <div th:case="'BRANDY'">
-                  <p>Бренди</p>
+                  Бренди
                 </div>
                 <div th:case="'NONE'">
-                  <p>Без алкохол</p>
+                  Без алкохол
                 </div>
-              </div>
             </li>
+            <li th:text="|Вкус: *{#strings.capitalize(#strings.toLowerCase(flavour))}|"></li>
+            <li th:text="|Съдържание на алкохол: *{percentAlcohol}%|"></li>
+            <li th:text="|Порции: *{servings}|"></li>
           </ul>
 
         </div>

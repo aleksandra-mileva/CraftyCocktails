@@ -43,6 +43,9 @@ site:
   base:
     url: http://localhost:8080
 
+fortuneservice:
+  base:
+    url: http://localhost:8081/fortune-service
 
 home:
   page:
