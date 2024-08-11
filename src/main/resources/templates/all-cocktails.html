@@ -32,39 +32,39 @@
                             <div th:switch="${c.spirit.name()}"
                                     class="col-3 p-2 text-center">
                                 <p>Алкохол</p>
-                                <div th:case="'WHISKEY'">
+                                <div th:case="'WHISKEY'" style="font-weight: bold;">
                                     Whiskey
                                 </div>
-                                <div th:case="'TEQUILA'">
+                                <div th:case="'TEQUILA'" style="font-weight: bold;">
                                     Tequila
                                 </div>
-                                <div th:case="'GIN'">
+                                <div th:case="'GIN'" style="font-weight: bold;">
                                     Gin
                                 </div>
-                                <div th:case="'RUM'">
+                                <div th:case="'RUM'" style="font-weight: bold;">
                                     Rum
                                 </div>
-                                <div th:case="'VODKA'">
+                                <div th:case="'VODKA'" style="font-weight: bold;">
                                     Vodka
                                 </div>
-                                <div th:case="'BRANDY'">
+                                <div th:case="'BRANDY'" style="font-weight: bold;">
                                     Brandy
                                 </div>
-                                <div th:case="'NONE'">
+                                <div th:case="'NONE'" style="font-weight: bold;">
                                     Without alcohol
                                 </div>
                             </div>
                             <div class="col-3 p-2 text-center">
                                 <p>Вкус</p>
-                                <p th:text="*{#strings.capitalize(#strings.toLowerCase(flavour))}">Sweet</p>
+                                <p th:text="*{#strings.capitalize(#strings.toLowerCase(flavour))}" style="font-weight: bold;">Sweet</p>
                             </div>
                             <div class="col-3 p-2 text-center">
                                 <p>%</p>
-                                <p th:text="|*{percentAlcohol}%|">13%</p>
+                                <p th:text="|*{percentAlcohol}%|" style="font-weight: bold;">13%</p>
                             </div>
                             <div class="col-3 p-2 text-center">
                                 <p>Порции</p>
-                                <p th:text="*{servings}">5</p>
+                                <p th:text="*{servings}" style="font-weight: bold;">5</p>
                             </div>
                         </div>
                         <a th:href="@{/cocktails/details/{id}(id=*{id})}" class="btn btn-secondary btn-sm mb-2">Details</a>
