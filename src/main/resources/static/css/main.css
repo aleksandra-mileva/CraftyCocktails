@@ -322,6 +322,25 @@ nav .dropdown-item:hover {
   overflow-wrap: break-word;
 }
 
+.fortune {
+  width: 700px;
+  margin: 0 auto;
+  padding: 50px;
+}
+
+blockquote {
+  border-left: 3px solid rgb(221, 221, 221);
+  padding-left: 20px;
+  font-style: italic;
+  font-weight: bold;
+  text-align: left;
+}
+
+.name {
+  text-align: right;
+  font-weight: lighter;
+}
+
 
 
 

@@ -1,0 +1,25 @@
+<!doctype html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org"
+>
+<head th:replace="~{fragments/commons::head}"></head>
+
+<body>
+
+<header>
+  <nav th:replace="~{fragments/commons::navigation}"></nav>
+</header>
+
+<div class="container content-container">
+
+  <div class="fortune" th:object="${fortune}">
+    <blockquote>
+      <p th:text="*{content}"></p>
+      <p class="text-end name" th:text="*{author}"></p>
+    </blockquote>
+  </div>
+</div>
+
+</body>
+
+</html>

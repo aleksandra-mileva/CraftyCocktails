@@ -38,6 +38,7 @@
 
     <div class="collapse navbar-collapse pl-lg-5 ml-lg-5" id="navbarSupportedContent">
         <ul class="navbar-nav mr-auto col-12 justify-content-between">
+            <!-- Cocktails-->
             <li class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle" href="#" id="cocktailsDropdown" role="button" data-toggle="dropdown"
                    aria-haspopup="true" aria-expanded="false" th:text="#{navbar_cocktails}">
@@ -61,12 +62,21 @@
                     <a class="dropdown-item" th:href="@{/cocktails/non-alcoholic}" th:text="#{navbar_non-alcoholic_cocktails}">Non-alcoholic cocktails</a>
                 </div>
             </li>
+            <!-- EO: Cocktails-->
+
+            <!-- Search-->
             <li class="nav-item">
                 <a class="nav-link" th:text="#{navbar_search}" href="/cocktails/search">Search</a>
             </li>
+            <!-- EO: Search-->
+
+            <!-- Add cocktail-->
             <li class="nav-item" sec:authorize="isAuthenticated()">
                 <a class="nav-link" th:text="#{navbar_add_cocktail}" href="/cocktails/add">Add cocktail</a>
             </li>
+            <!-- EO: Add cocktail-->
+
+            <!-- Profile-->
             <li class="nav-item dropdown" sec:authorize="isAuthenticated()">
                 <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown"
                    aria-haspopup="true" aria-expanded="false" th:text="#{navbar_user}">
@@ -80,8 +90,13 @@
                     <a class="dropdown-item" th:href="@{/users/profile/{id}/addedPictures(id=${#authentication.principal.id})}" th:text="#{navbar_user_addedPics}">My photos</a>
                     <div class="dropdown-divider"></div>
                     <a class="dropdown-item" th:href="@{/users/profile/{id}/favoriteCocktails(id=${#authentication.principal.id})}" th:text="#{navbar_user_favorites}">Favorite cocktails</a>
+                    <div class="dropdown-divider"></div>
+                    <a class="dropdown-item" th:href="@{/fortunes/fortune}" th:text="#{navbar_user_fortune}">Get fortune</a>
                 </div>
             </li>
+            <!-- EO: Profile-->
+
+            <!-- Admin-->
             <li class="nav-item dropdown" sec:authorize="hasRole('ADMIN')">
                 <a class="nav-link dropdown-toggle" href="#" id="adminDropdown" role="button" data-toggle="dropdown"
                    aria-haspopup="true" aria-expanded="false" th:text="#{navbar_admin}">
@@ -95,6 +110,9 @@
                     <a class="dropdown-item" th:href="@{/fortunes/add}" th:text="#{navbar_admin_add_fortune}">Add fortune</a>
                 </div>
             </li>
+            <!-- EO: Admin-->
+
+            <!-- Welcome and Logout-->
             <li class="nav-item" sec:authorize="isAuthenticated()">
                 <div class="form-inline my-2 my-lg-0 px-3">
                     <div class="logged-user text-dark"
@@ -105,6 +123,9 @@
                     </form>
                 </div>
             </li>
+            <!-- EO: Welcome and Logout-->
+
+            <!-- Register and Login-->
             <th:block sec:authorize="!isAuthenticated()">
                 <li class="nav-item">
                     <a class="nav-link" th:text="#{navbar_register}" th:href="@{/users/register}">Register</a>
@@ -113,6 +134,9 @@
                     <a class="nav-link" th:text="#{navbar_login}" th:href="@{/users/login}">Login</a>
                 </li>
             </th:block>
+            <!-- EO: Register and Login-->
+
+            <!-- Language-->
             <li class="nav-item d-flex align-items-center">
                 <form th:method="get" class="d-flex align-items-center">
                     <label class="text-dark mr-2 mb-0" th:text="#{navbar_language}" for="lang"></label>
@@ -125,6 +149,7 @@
                     </select>
                 </form>
             </li>
+            <!-- EO: Language-->
         </ul>
     </div>
 </nav>

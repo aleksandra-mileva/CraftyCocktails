@@ -33,7 +33,7 @@ public class SecurityConfig {
         .requestMatchers(PathRequest.toStaticResources().atCommonLocations()).permitAll()
         .antMatchers("/", "/cocktails/**", "/api/**", "/maintenance/**").permitAll()
         .antMatchers("/users/register/**", "/users/login", "/password/**").anonymous()
-        .antMatchers("/users/profile", "/cocktails/add", "/users/profile/**").authenticated()
+        .antMatchers("/users/profile", "/cocktails/add", "/users/profile/**", "/fortunes/fortune").authenticated()
         .antMatchers("/statistics", "/fortunes", "/fortunes/**").hasRole(RoleNameEnum.ADMIN.name())
         .anyRequest()
         .authenticated()

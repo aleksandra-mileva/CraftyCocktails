@@ -43,4 +43,12 @@ public class FortuneService {
         .bodyToMono(Void.class)
         .block();
   }
+
+  public FortunelViewModel getRandomFortune() {
+    return webClient.get()
+        .uri("/fortunes/random")
+        .retrieve()
+        .bodyToMono(FortunelViewModel.class)
+        .block();
+  }
 }
