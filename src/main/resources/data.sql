@@ -142,14 +142,112 @@ VALUES (7, "NONE", "Листата мента (20 листа) се измива�
 
 INSERT INTO cocktails_types(cocktail_entity_id, types_id) values (7, 2);
 
+INSERT INTO cocktails(id, spirit, preparation, flavour, name, servings, ingredients, percent_alcohol, video_url, author_id)
+VALUES (8, "RUM", "Листенцата мента се накъсват, като леко се притриват с пръсти и пускат на дъното на чашата.
+
+Добавя се тръстиковата захар сок от половин лайм.
+
+С помощта на дървена лъжица или чукало ментата се счуква отново, за да пусне аромата си.
+
+В чашата се слагат кубчета лед, който се залива с качествен бял ром и газирана вода.
+
+Чашата с Мохито се декорира с резенчета лайм и коктейлът е готов за сервиране.
+
+Коктейл Мохито е изключително приятен, свеж и има вкус на почивка или още по точно - на летен бриз.",
+"SWEET",
+"Мохито", 2,
+"12 бр. пресни листа мента
+4 ч.л. тръстикова захар
+1 лайм
+кубчета лед
+60 мл. бял ром Havana Club
+200 мл газирана вода",
+10, "https://www.youtube.com/watch?v=KWU9ZaWbeuQ", 2);
+
+INSERT INTO cocktails_types(cocktail_entity_id, types_id) values (8, 1);
+
+INSERT INTO cocktails(id, spirit, preparation, flavour, name, servings, ingredients, percent_alcohol, video_url, author_id)
+VALUES (9, "WHISKEY", "Добавете бърбън, лимонов сок, захарен сироп и яйчен белтък към шейкър и разклатете добре за 30 секунди без лед.
+
+Добавете лед и разклатете отново, докато се охлади добре.
+
+Прецедете в чаша.",
+"SOUR",
+"Уиски Сауър", 1,
+"2 унции бърбън
+¾ чаша лимонов сок
+½ унции захарен сироп сироп
+½ унции яйчен белтък (по избор)",
+14, "https://www.youtube.com/watch?v=kfB1vLhz2Pw", 2);
+
+INSERT INTO cocktails_types(cocktail_entity_id, types_id) values (9, 1);
+
+INSERT INTO cocktails(id, spirit, preparation, flavour, name, servings, ingredients, percent_alcohol, video_url, author_id)
+VALUES (10, "GIN", "В чаша пълна с лед се наливат джинът (30 мл.), вермутът (30 мл.) и кампарито (30 мл.).
+
+Коктейлът се разбърква и се украсява с резенчета портокал.",
+"BITTER",
+"Негрони", 1,
+"30 мл. джин
+30 мл. сладък вермут
+30 мл. кампари
+2 резенчета портокал
+лед",
+24, "https://www.youtube.com/watch?v=JFggu73t9gA", 2);
+
+INSERT INTO cocktails_types(cocktail_entity_id, types_id) values (10, 1);
+
+INSERT INTO cocktails(id, spirit, preparation, flavour, name, servings, ingredients, percent_alcohol, video_url, author_id)
+VALUES (11, "NONE", "Пъпешът се обелва, семките се отстраняват и меката част се пасира до пюре.
+
+Добавя се сладоледът и сместа се пасира отново.
+
+Босилекът се нарязва на ситно и се добавя към пюрето от пъпеш.
+
+Накрая се добавя натрошеният лед, коктейлът се разпределя в чаши и се сервира веднага с широки сламки.",
+"SWEET",
+"Пъпешов коктейл", 1,
+"1 кг пъпеш
+200 г ванилов сладолед
+4 стръка босилек
+200 г натрошен лед",
+0, "https://www.youtube.com/watch?v=wocu1HTj0Rc", 1);
+
+INSERT INTO cocktails_types(cocktail_entity_id, types_id) values (11, 2);
+
+INSERT INTO cocktails(id, spirit, preparation, flavour, name, servings, ingredients, percent_alcohol, video_url, author_id)
+VALUES (12, "NONE", "Листенцата на ментата се накъсват. Лимонът и портокалът се заливат с гореща вода и се изцеждат.
+
+Кората на динята се маха, вътрешността се реже на парчета, семките се отстраняват.
+
+Динята се пасира заедно с меда, лимона и портокала.
+
+Коктейлът се оставя за 1 час в хладилника и се сервира с лед и листенца мента.",
+"SWEET",
+"Коктейл с диня", 1,
+"1 бр. лимон
+1 бр. портокал
+1 кг диня
+3 ч.л. мед
+2 стръка мента
+2 ч.ч. на кубчета лед",
+        0, "https://www.youtube.com/watch?v=2zUzILH4To4", 2);
+
+INSERT INTO cocktails_types(cocktail_entity_id, types_id) values (12, 2);
+
 INSERT INTO pictures(id, public_id, title, url, author_id, cocktail_id) VALUES
                                                                           (1, "fl1ipqtikphbiekb8lcp", "PinaColada", "https://res.cloudinary.com/dlknl4mzd/image/upload/v1723131202/fl1ipqtikphbiekb8lcp.png", 1, 1),
                                                                           (2, "kgv4ekkxr9goboq44sfg", "Manhatten", "https://res.cloudinary.com/dlknl4mzd/image/upload/v1723131202/kgv4ekkxr9goboq44sfg.png", 1, 2),
                                                                           (3, "usbmwu2oh7goh0ofi44u", "teqilaSunrise", "https://res.cloudinary.com/dlknl4mzd/image/upload/v1723131203/usbmwu2oh7goh0ofi44u.png", 1, 3),
-                                                                          (4, "lqq4ybuzp6lgw3g8xfjd", "Martini", "https://res.cloudinary.com/dlknl4mzd/image/upload/v1723131202/lqq4ybuzp6lgw3g8xfjd.jpg", 1, 4),
-                                                                          (5, "o3vakwrhgrzlgrctp4gs", "BloodyMary", "https://res.cloudinary.com/dlknl4mzd/image/upload/v1723131202/o3vakwrhgrzlgrctp4gs.jpg", 2, 5),
-                                                                          (6, "exkybjsjyonsib8b4lnf", "BrandySour", "https://res.cloudinary.com/dlknl4mzd/image/upload/v1723131202/exkybjsjyonsib8b4lnf.jpg", 2, 6),
-                                                                          (7, "w4ukqvhml1zkqydqhel1", "mojitoVirgin", "https://res.cloudinary.com/dlknl4mzd/image/upload/v1723131202/w4ukqvhml1zkqydqhel1.jpg", 2, 7);
+                                                                          (4, "mz8brm4guvo2ghme4lcv", "Martini", "https://res.cloudinary.com/dlknl4mzd/image/upload/v1723378829/mz8brm4guvo2ghme4lcv.png", 1, 4),
+                                                                          (5, "o3vakwrhgrzlgrctp4gs", "BloodyMary", "https://res.cloudinary.com/dlknl4mzd/image/upload/v1723131202/o3vakwrhgrzlgrctp4gs.jpg", 1, 5),
+                                                                          (6, "exkybjsjyonsib8b4lnf", "BrandySour", "https://res.cloudinary.com/dlknl4mzd/image/upload/v1723131202/exkybjsjyonsib8b4lnf.jpg", 1, 6),
+                                                                          (7, "w4ukqvhml1zkqydqhel1", "mojitoVirgin", "https://res.cloudinary.com/dlknl4mzd/image/upload/v1723131202/w4ukqvhml1zkqydqhel1.jpg", 1, 7),
+                                                                          (8, "duhvmdz81pzmlgdzq7cx", "mojito", "https://res.cloudinary.com/dlknl4mzd/image/upload/v1723377633/duhvmdz81pzmlgdzq7cx.jpg", 2, 8),
+                                                                          (9, "piuc8iifkqmlpzzeii03", "whiskeySour", "https://res.cloudinary.com/dlknl4mzd/image/upload/v1723378069/piuc8iifkqmlpzzeii03.jpg", 2, 9),
+                                                                          (10, "vbhxtfkuxk32x9qxrfno", "negroni", "https://res.cloudinary.com/dlknl4mzd/image/upload/v1723378386/vbhxtfkuxk32x9qxrfno.png", 2, 10),
+                                                                          (11, "Screenshot_2024-08-11_at_15.41.09_laysak", "melon", "https://res.cloudinary.com/dlknl4mzd/image/upload/v1723380112/Screenshot_2024-08-11_at_15.41.09_laysak.png", 2, 11),
+                                                                          (12, "smni2t0omh2dtc6cihry", "melon", "https://res.cloudinary.com/dlknl4mzd/image/upload/v1723380302/smni2t0omh2dtc6cihry.png", 2, 12);
 
 
 
