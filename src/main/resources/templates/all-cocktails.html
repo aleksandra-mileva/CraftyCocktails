@@ -29,48 +29,42 @@
                     </div>
                     <div class="card-footer bg-white">
                         <div class="d-flex flex-row">
+                            <div th:switch="${c.spirit.name()}"
+                                    class="col-3 p-2 text-center">
+                                <p>Алкохол</p>
+                                <div th:case="'WHISKEY'">
+                                    Whiskey
+                                </div>
+                                <div th:case="'TEQUILA'">
+                                    Tequila
+                                </div>
+                                <div th:case="'GIN'">
+                                    Gin
+                                </div>
+                                <div th:case="'RUM'">
+                                    Rum
+                                </div>
+                                <div th:case="'VODKA'">
+                                    Vodka
+                                </div>
+                                <div th:case="'BRANDY'">
+                                    Brandy
+                                </div>
+                                <div th:case="'NONE'">
+                                    Without alcohol
+                                </div>
+                            </div>
                             <div class="col-3 p-2 text-center">
-                                <p><i class="fa-regular fa-clock fa-2x"></i></p>
+                                <p>Вкус</p>
+                                <p th:text="*{#strings.capitalize(#strings.toLowerCase(flavour))}">Sweet</p>
+                            </div>
+                            <div class="col-3 p-2 text-center">
+                                <p>%</p>
                                 <p th:text="|*{percentAlcohol}%|">13%</p>
                             </div>
                             <div class="col-3 p-2 text-center">
-                                <p><i class="fa-solid fa-bowl-rice fa-2x"></i></p>
+                                <p>Порции</p>
                                 <p th:text="*{servings}">5</p>
-                            </div>
-                            <div th:switch="${c.spirit.name()}"
-                                    class="col-3 p-2 text-center">
-                                <div th:case="'WHISKEY'">
-                                    <p><i class="fa-solid fa-drumstick-bite fa-2x"></i></p>
-                                    <p>Whiskey</p>
-                                </div>
-                                <div th:case="'TEQUILA'">
-                                    <p><i class="fa-solid fa-seedling fa-2x"></i></p>
-                                    <p>Tequila</p>
-                                </div>
-                                <div th:case="'GIN'">
-                                    <p><i class="fa-solid fa-egg fa-2x"></i></p>
-                                    <p>Gin</p>
-                                </div>
-                                <div th:case="'RUM'">
-                                    <p><i class="fa-solid fa-egg fa-2x"></i></p>
-                                    <p>Rum</p>
-                                </div>
-                                <div th:case="'VODKA'">
-                                    <p><i class="fa-solid fa-egg fa-2x"></i></p>
-                                    <p>Vodka</p>
-                                </div>
-                                <div th:case="'BRANDY'">
-                                    <p><i class="fa-solid fa-egg fa-2x"></i></p>
-                                    <p>Brandy</p>
-                                </div>
-                                <div th:case="'NONE'">
-                                    <p><i class="fa-solid fa-egg fa-2x"></i></p>
-                                    <p>Without alcohol</p>
-                                </div>
-                            </div>
-                            <div class="col-3 p-2 text-center">
-                                <p><i class="fa-solid fa-stairs fa-2x"></i></p>
-                                <p th:text="*{#strings.capitalize(#strings.toLowerCase(flavour))}">Sweet</p>
                             </div>
                         </div>
                         <a th:href="@{/cocktails/details/{id}(id=*{id})}" class="btn btn-secondary btn-sm mb-2">Details</a>
