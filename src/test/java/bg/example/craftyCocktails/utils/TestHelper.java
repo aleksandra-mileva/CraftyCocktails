@@ -1,5 +1,6 @@
 package bg.example.craftyCocktails.utils;
 
+import bg.example.craftyCocktails.model.dto.SearchCocktailDto;
 import bg.example.craftyCocktails.model.entity.CocktailEntity;
 import bg.example.craftyCocktails.model.entity.PictureEntity;
 import bg.example.craftyCocktails.model.entity.RoleEntity;
@@ -145,5 +146,17 @@ public class TestHelper {
 
   public PictureRepository getPictureRepository() {
     return pictureRepository;
+  }
+
+  public SearchCocktailDto createSearchCocktailDto(String name) {
+    SearchCocktailDto searchCocktailDto = new SearchCocktailDto();
+    searchCocktailDto.setName(name);
+    searchCocktailDto.setFlavour(FlavourEnum.SWEET);
+    searchCocktailDto.setTypes(List.of(TypeNameEnum.ALCOHOLIC));
+    searchCocktailDto.setSpirit(SpiritNameEnum.GIN);
+    searchCocktailDto.setMinPercentAlcohol(10);
+    searchCocktailDto.setMaxPercentAlcohol(40);
+
+    return searchCocktailDto;
   }
 }
