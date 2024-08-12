@@ -19,7 +19,7 @@ import java.util.List;
 import org.springframework.stereotype.Component;
 
 @Component
-public class TestDataUtils {
+public class TestHelper {
 
   private final UserRepository userRepository;
   private final RoleRepository roleRepository;
@@ -27,7 +27,7 @@ public class TestDataUtils {
   private final TypeRepository typeRepository;
   private final PictureRepository pictureRepository;
 
-  public TestDataUtils(
+  public TestHelper(
       UserRepository userRepository,
       RoleRepository roleRepository,
       CocktailRepository cocktailRepository,
@@ -51,7 +51,7 @@ public class TestDataUtils {
     }
   }
 
-  public UserEntity createTestAdmin(String username) {
+  public UserEntity createAdmin(String username) {
     initRoles();
 
     UserEntity admin = new UserEntity().
@@ -65,7 +65,7 @@ public class TestDataUtils {
     return userRepository.save(admin);
   }
 
-  public UserEntity createTestUser(String username) {
+  public UserEntity createUser(String username) {
     initRoles();
 
     UserEntity user = new UserEntity().
@@ -82,7 +82,7 @@ public class TestDataUtils {
     return userRepository.save(user);
   }
 
-  public CocktailEntity createTestColcktail(UserEntity author, List<TypeEntity> types) {
+  public CocktailEntity createCocktail(UserEntity author, List<TypeEntity> types) {
     var testCocktail = new CocktailEntity()
         .setName("Mohito")
         .setIngredients("Gin 30ml.")
@@ -97,11 +97,11 @@ public class TestDataUtils {
         .setPictures(new ArrayList<>());
 
     testCocktail = cocktailRepository.save(testCocktail);
-    testCocktail.getPictures().add(createTestPicture(author, testCocktail));
+    testCocktail.getPictures().add(createPicture(author, testCocktail));
     return cocktailRepository.save(testCocktail);
   }
 
-  public List<TypeEntity> createTestTypes() {
+  public List<TypeEntity> createTypes() {
     var typeEntityFirst = new TypeEntity().
         setName(TypeNameEnum.ALCOHOLIC);
 
@@ -116,7 +116,7 @@ public class TestDataUtils {
     return types;
   }
 
-  public PictureEntity createTestPicture(UserEntity author, CocktailEntity cocktail) {
+  public PictureEntity createPicture(UserEntity author, CocktailEntity cocktail) {
     var pictureEntity = new PictureEntity().
         setAuthor(author).
         setCocktail(cocktail).

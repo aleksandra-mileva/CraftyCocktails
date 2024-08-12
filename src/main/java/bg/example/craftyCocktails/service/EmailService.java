@@ -44,17 +44,6 @@ public class EmailService {
     }
   }
 
-  private String generateEmailSubject(AbstractEmailContext context) {
-    return messageSource.getMessage(
-        context.getSubject(),
-        new Object[0],
-        context.getLocale());
-  }
-
-  private String generateMessageContent(AbstractEmailContext context) {
-    return templateEngine.process(context.getTemplateLocation(), context.getContext());
-  }
-
   public void sendSimpleMessage(
       String to, String subject, String text) {
 
@@ -66,6 +55,17 @@ public class EmailService {
     javaMailSender.send(message);
 
     logger.info("Message was sent");
+  }
+
+  private String generateEmailSubject(AbstractEmailContext context) {
+    return messageSource.getMessage(
+        context.getSubject(),
+        new Object[0],
+        context.getLocale());
+  }
+
+  private String generateMessageContent(AbstractEmailContext context) {
+    return templateEngine.process(context.getTemplateLocation(), context.getContext());
   }
 
 }

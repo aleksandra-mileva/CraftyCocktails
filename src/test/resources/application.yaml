@@ -15,7 +15,7 @@ mail:
   host: "localhost"
   port: 1025
   username: "craftyCocktails@craftyCocktails.com"
-  password: ""
+  password: "pass"
 
 
 site:

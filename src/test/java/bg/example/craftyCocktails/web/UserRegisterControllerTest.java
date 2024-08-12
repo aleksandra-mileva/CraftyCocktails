@@ -133,7 +133,8 @@ class UserRegisterControllerTest {
     Assertions.assertEquals(TEST_USER_EMAIL, newlyCreatedUser.getEmail());
     Assertions.assertEquals(TEST_USER_FIRSTNAME, newlyCreatedUser.getFirstName());
     Assertions.assertEquals(TEST_USER_LASTNAME, newlyCreatedUser.getLastName());
-    Assertions.assertTrue(passwordEncoder.matches(TEST_USER_PASSWORD, newlyCreatedUser.getPassword()));
+    Assertions.assertTrue(
+        passwordEncoder.matches(TEST_USER_PASSWORD, newlyCreatedUser.getPassword()));
     Assertions.assertFalse(newlyCreatedUser.isAccountVerified());
   }
 
