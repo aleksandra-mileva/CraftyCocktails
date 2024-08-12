@@ -30,7 +30,7 @@ public class HomeController {
     return "index";
   }
 
-  @Scheduled(cron = "${home.page.cron}")
+  @Scheduled(cron = "${home-page-cron}")
   public void scheduleInitHomePageDto() {
     homePageDto = homePageService.initHomePageDto();
   }

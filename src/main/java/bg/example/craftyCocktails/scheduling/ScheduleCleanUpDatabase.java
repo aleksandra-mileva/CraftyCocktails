@@ -2,6 +2,7 @@ package bg.example.craftyCocktails.scheduling;
 
 import bg.example.craftyCocktails.service.SecureTokenService;
 import bg.example.craftyCocktails.service.UserService;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 
@@ -18,8 +19,8 @@ public class ScheduleCleanUpDatabase {
     this.secureTokenService = secureTokenService;
   }
 
-  @Scheduled(cron = "0 0/16 * * * ?") //On every 16 minutes
-  private void generateDailyReport() {
+  @Scheduled(cron = "${daily-deletion-cron}")
+  private void cleanUpDatabase() {
     log.info("Start cleaning up database");
     secureTokenService.cleanUpSecureTokens();
     userService.cleanUpNotVerifiedUsers();

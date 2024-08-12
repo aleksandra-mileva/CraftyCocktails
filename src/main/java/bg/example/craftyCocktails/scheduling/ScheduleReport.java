@@ -14,7 +14,7 @@ public class ScheduleReport {
     this.reportService = reportService;
   }
 
-  @Scheduled(cron = "0 0 0 * * ?")
+  @Scheduled(cron = "${daily-report-cron}")
   private void generateDailyReport() {
     log.info("Start creating report");
     reportService.generateDailyReport();

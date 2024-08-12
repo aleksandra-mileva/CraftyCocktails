@@ -26,6 +26,6 @@ fortuneservice:
   base:
     url: http://localhost:8081/fortune-service
 
-home:
-  page:
-    cron: "0 0 0,16 * * ?"
+home-page-cron: "0 0 0,16 * * ?"
+daily-report-cron: "0 0 0 * * ?"
+daily-deletion-cron: "0 0/16 * * * ?"
