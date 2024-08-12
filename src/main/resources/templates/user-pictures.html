@@ -35,7 +35,6 @@
         <form
             th:action="@{/users/profile/{userId}/deletePicture(userId=${#authentication.principal.id})}"
             th:method="delete"
-            onsubmit="return confirm('Are you sure you want to delete this picture?');"
             style="display: inline;">
           <input type="hidden" name="pictureId" th:value="*{id}">
           <button type="submit" class="btn btn-danger btn-sm">
