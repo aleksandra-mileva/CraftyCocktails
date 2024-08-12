@@ -26,6 +26,6 @@ public class MaintenanceInterceptor implements HandlerInterceptor {
   }
 
   private boolean isMaintenanceTime(LocalTime now) {
-    return now.isAfter(LocalTime.of(22, 59)) && now.isBefore(LocalTime.of(23, 59, 59, 999999999));
+    return now.isAfter(LocalTime.of(23, 59)) && now.isBefore(LocalTime.of(23, 59, 59, 999999999));
   }
 }

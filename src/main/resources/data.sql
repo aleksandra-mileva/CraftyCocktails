@@ -236,9 +236,9 @@ VALUES (12, "NONE", "Листенцата на ментата се накъсв�
 INSERT INTO cocktails_types(cocktail_entity_id, types_id) values (12, 2);
 
 INSERT INTO pictures(id, public_id, title, url, author_id, cocktail_id) VALUES
-                                                                          (1, "fl1ipqtikphbiekb8lcp", "PinaColada", "https://res.cloudinary.com/dlknl4mzd/image/upload/v1723131202/fl1ipqtikphbiekb8lcp.png", 1, 1),
+                                                                          (1, "rfx5pdjd6cpn3pbbrtcm", "PinaColada", "https://res.cloudinary.com/dlknl4mzd/image/upload/v1723493424/rfx5pdjd6cpn3pbbrtcm.jpg", 1, 1),
                                                                           (2, "kgv4ekkxr9goboq44sfg", "Manhatten", "https://res.cloudinary.com/dlknl4mzd/image/upload/v1723131202/kgv4ekkxr9goboq44sfg.png", 1, 2),
-                                                                          (3, "usbmwu2oh7goh0ofi44u", "teqilaSunrise", "https://res.cloudinary.com/dlknl4mzd/image/upload/v1723131203/usbmwu2oh7goh0ofi44u.png", 1, 3),
+                                                                          (3, "dicy7bijiddeksrawdz8", "teqilaSunrise", "https://res.cloudinary.com/dlknl4mzd/image/upload/v1723493458/dicy7bijiddeksrawdz8.jpg", 1, 3),
                                                                           (4, "mz8brm4guvo2ghme4lcv", "Martini", "https://res.cloudinary.com/dlknl4mzd/image/upload/v1723378829/mz8brm4guvo2ghme4lcv.png", 1, 4),
                                                                           (5, "o3vakwrhgrzlgrctp4gs", "BloodyMary", "https://res.cloudinary.com/dlknl4mzd/image/upload/v1723131202/o3vakwrhgrzlgrctp4gs.jpg", 1, 5),
                                                                           (6, "exkybjsjyonsib8b4lnf", "BrandySour", "https://res.cloudinary.com/dlknl4mzd/image/upload/v1723131202/exkybjsjyonsib8b4lnf.jpg", 1, 6),

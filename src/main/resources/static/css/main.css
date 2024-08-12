@@ -4,16 +4,6 @@ body {
   background-color: #f4f3f2;
 }
 
-.bg-custom {
-  background-image: linear-gradient(to bottom right, rgba(70, 70, 70, 0.8), rgba(10, 10, 10, 0.8));
-  color: white;
-}
-
-.bg-custom-reversed {
-  background-image: linear-gradient(to top right, rgba(70, 70, 70, 0.8), rgba(10, 10, 10, 0.8));
-  color: white;
-}
-
 .border-custom {
   border: 2px solid #cccccca9;
   border-radius: 8px;
@@ -155,11 +145,6 @@ ul.custom-list li {
 .register-image {
   background-image: linear-gradient(to bottom left, rgba(70, 70, 70, 0.8), rgba(10, 10, 10, 0.8));
   overflow: hidden;
-}
-
-.btn-custom {
-  font-size: 1.5rem;
-  line-height: 0.7rem;
 }
 
 #overlay {
