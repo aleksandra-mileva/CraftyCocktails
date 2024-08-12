@@ -4,7 +4,9 @@
 
 This project is a blog about cocktails. It is a place where users can find cocktails for different cocktails, share their own cocktails, comment on the cocktails of other users, save their favourite cocktails.
 
-![image](https://private-user-images.githubusercontent.com/129898587/357199136-44f8ed0e-fcb7-4a67-83b4-be3bd003a7f2.png?jwt=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJnaXRodWIuY29tIiwiYXVkIjoicmF3LmdpdGh1YnVzZXJjb250ZW50LmNvbSIsImtleSI6ImtleTUiLCJleHAiOjE3MjM0OTYzNjMsIm5iZiI6MTcyMzQ5NjA2MywicGF0aCI6Ii8xMjk4OTg1ODcvMzU3MTk5MTM2LTQ0ZjhlZDBlLWZjYjctNGE2Ny04M2I0LWJlM2JkMDAzYTdmMi5wbmc_WC1BbXotQWxnb3JpdGhtPUFXUzQtSE1BQy1TSEEyNTYmWC1BbXotQ3JlZGVudGlhbD1BS0lBVkNPRFlMU0E1M1BRSzRaQSUyRjIwMjQwODEyJTJGdXMtZWFzdC0xJTJGczMlMkZhd3M0X3JlcXVlc3QmWC1BbXotRGF0ZT0yMDI0MDgxMlQyMDU0MjNaJlgtQW16LUV4cGlyZXM9MzAwJlgtQW16LVNpZ25hdHVyZT03NmRlMzVmYWNiYjA4MDg5MGYzNGU0OGY0MDNiYzM3YzY1ZThhY2FjMDYxYjk4MTJhNjQxMTlmN2E2NjEzOTQ3JlgtQW16LVNpZ25lZEhlYWRlcnM9aG9zdCZhY3Rvcl9pZD0wJmtleV9pZD0wJnJlcG9faWQ9MCJ9.VuDIdlyajluDxFOWRxZ507WCzFU--xPuMrtr8qRt2RI)
+<img src="src/main/resources/static/images/forReadme.png" alt=""/>
+
+
 ##  How to run with Docker
 - Use docker compose to run the application. The application will be available on `http://localhost:8080/`.
 - The docker compose file is in the root of the project and contains images for the application, the database and the Drinking Fortunes REST API.
