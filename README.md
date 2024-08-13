@@ -9,7 +9,7 @@ This project is a blog about cocktails. It is a place where users can find cockt
 
 ##  How to run with Docker
 - Use docker compose to run the application. The application will be available on `http://localhost:8080/`.
-- The docker compose file is in the root of the project and contains images for the application, the database and the Drinking Fortunes REST API.
+- The docker compose file is in /local directory of the project and contains images for the application, the database and the Drinking Fortunes REST API.
 - Following command should be executed in /local directory of the project with already installed docker and docker-compose: `docker-compose up` or `docker-compose -f docker-compose-amd.yaml up`
 - You can log in with the following credentials: 
   - **Admin**: username: `admin`, password: `12345`
