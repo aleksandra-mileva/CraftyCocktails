@@ -16,30 +16,30 @@
           class="col-sm-12 col-lg-10 mx-auto"
           id="searchCocktailForm">
 
-      <h2 class="text-center text-dark my-4">Search cocktails</h2>
+      <h2 class="text-center text-dark my-4" th:text="#{search_heading}">Search cocktails</h2>
 
       <div class="row px-3">
         <div class="form-group col-sm-12 col-md-4  mx-0 px-2">
-          <label for="name" class="text-dark font-weight-bold">Cocktail name</label>
+          <label for="name" class="text-dark font-weight-bold" th:text="#{search_cocktail_name}">Cocktail name</label>
           <input th:field="*{name}"
                  th:errorclass="is-invalid"
                  id="name"
                  type="text"
                  class="form-control"
-                 placeholder="Cocktail name"/>
+                 th:placeholder="#{search_cocktail_name}"/>
           <p th:each="err : ${#fields.errors('name')}"
              th:text="${err}" id="inputNameError"
              class="invalid-feedback text-danger mb-0">Cocktail name must be between 5 and 30
             symbols!</p>
         </div>
         <div class="form-group col-sm-12 col-md-2  mx-0 px-2">
-          <label for="minPercentAlcohol" class="text-dark font-weight-bold">Min percent
+          <label for="minPercentAlcohol" class="text-dark font-weight-bold" th:text="#{search_min_percent_alcohol}">Min percent
             alcohol</label>
           <input th:field="*{minPercentAlcohol}"
                  th:errorclass="is-invalid"
                  id="minPercentAlcohol" type="number" min="0" max="480" step="1"
                  class="form-control"
-                 placeholder="Min alcohol"/>
+                 th:placeholder="#{search_min_percent_alcohol}"/>
           <p th:each="err : ${#fields.errors('minPercentAlcohol')}"
              th:text="${err}"
              class="invalid-feedback text-danger mb-0">
@@ -47,13 +47,13 @@
           </p>
         </div>
         <div class="form-group col-sm-12 col-md-2  mx-0 px-2">
-          <label for="maxPercentAlcohol" class="text-dark font-weight-bold">Max percent
+          <label for="maxPercentAlcohol" class="text-dark font-weight-bold" th:text="#{search_max_percent_alcohol}">Max percent
             alcohol</label>
           <input th:field="*{maxPercentAlcohol}"
                  th:errorclass="is-invalid"
                  id="maxPercentAlcohol" type="number" min="0" max="480" step="1"
                  class="form-control"
-                 placeholder="Max alcohol"/>
+                 th:placeholder="#{search_max_percent_alcohol}"/>
           <p th:each="err : ${#fields.errors('maxPercentAlcohol')}"
              th:text="${err}"
              class="invalid-feedback text-danger mb-0">
@@ -61,11 +61,11 @@
           </p>
         </div>
         <div class="form-group col-sm-12 col-md-2  mx-0 px-2">
-          <label class="text-center text-dark font-weight-bold" for="hardnessLevel">Flavour</label>
+          <label class="text-center text-dark font-weight-bold" for="hardnessLevel" th:text="#{search_flavour}">Flavour</label>
           <select th:field="*{flavour}"
                   th:errorclass="is-invalid"
                   id="hardnessLevel" class="form-control">
-            <option value="" selected>Select flavour</option>
+            <option value="" selected th:text="#{search_select_flavour}">Select flavour</option>
             <option
                 th:each="f : ${T(bg.example.craftyCocktails.model.entity.enums.FlavourEnum).values()}"
                 th:value="${f}"
@@ -77,11 +77,11 @@
           </p>
         </div>
         <div class="form-group col-sm-12 col-md-2  mx-0 px-1">
-          <label class="text-center text-dark font-weight-bold" for="spirit">Spirit</label>
+          <label class="text-center text-dark font-weight-bold" for="spirit" th:text="#{search_spirit}">Spirit</label>
           <select th:field="*{spirit}"
                   th:errorclass="is-invalid"
                   id="spirit" class="form-control">
-            <option value="">Select spirit</option>
+            <option value="" th:text="#{search_select_spirit}">Select spirit</option>
             <option
                 th:each="s : ${T(bg.example.craftyCocktails.model.entity.enums.SpiritNameEnum).values()}"
                 th:value="${s}"
@@ -96,7 +96,7 @@
 
       <div class="row px-3 align-items-end">
         <div class="form-group col-lg-10 m-0 px-2">
-          <label class="text-center text-dark font-weight-bold" for="spirit">Choose types</label>
+          <label class="text-center text-dark font-weight-bold" for="spirit" th:text="#{search_types}">Choose types</label>
           <div class="container m-0 p-1">
             <div class="row text-dark">
               <div class="col-lg-2"
@@ -117,7 +117,7 @@
         </div>
         <div class="col-lg-2 pr-lg-0">
           <div class="button-holder d-flex justify-content-end">
-            <input id="submitBtn" type="submit" class="btn btn-secondary btn-lg" value="Search"/>
+            <input id="submitBtn" type="submit" class="btn btn-secondary btn-lg" th:value="#{search_button}"/>
           </div>
         </div>
 
@@ -130,7 +130,7 @@
 
 <div
     class="mx-5 my-3 py-2 px-3 border-custom title justify-content-center align-items-center bg-white">
-  <h4 class="text-center text-dark d-block">Results from searching criteria</h4>
+  <h4 class="text-center text-dark d-block" th:text="#{search_results}">Results from searching criteria</h4>
   <p class="text-center text-dark d-block pt-2 mb-1" th:text="${result}"></p>
 </div>
 
@@ -194,7 +194,7 @@
 </div>
 
 <th:block th:if="${cocktails != null}">
-  <h5 th:if="${cocktails.isEmpty()}" class="text-sm-center text-white mx-5 mb-5"
+  <h5 th:if="${cocktails.isEmpty()}" class="text-sm-center text-dark mx-5 mb-5"
       th:text="|No results found for cocktails with ${result}|"></h5>
 
   <th:block th:if="${not cocktails.isEmpty()}">
