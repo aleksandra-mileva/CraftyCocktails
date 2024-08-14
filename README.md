@@ -81,10 +81,12 @@ This project is a blog about cocktails. It is a place where users can find cockt
 ##  Bonuses
 - Drinking Fortunes REST API - **a separate project** that provides funny drinking fortunes. Using **WebClient** to communicate with the REST API.
 - **Cloudinary** - for uploading pictures
-- **Docker** images and docker-compose file for running the application
+- **Docker** images and docker-compose file for running the application with the REST API and the database
 - **Liquibase** for the database of Drinking Fortunes REST API
 - **MapStruct** in Drinking Fortunes REST API (ModelMapper in this project)
+- **CriteriaBuilder** API
 - Website is **Responsive**
+- Readme file
 
 
 
