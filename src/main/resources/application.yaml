@@ -4,8 +4,8 @@ spring:
   datasource:
     driverClassName: com.mysql.cj.jdbc.Driver
     url: "jdbc:mysql://${MYSQL_HOST:localhost}:${MYSQL_PORT:3306}/cocktail-db?allowPublicKeyRetrieval=true&useSSL=false&createDatabaseIfNotExist=true&serverTimezone=UTC"
-    username: ${USERNAME:root}
-    password: ${PASSWORD:}
+    username: ${MYSQL_USER:root}
+    password: ${MYSQL_PASS:}
   servlet:
     multipart:
       max-file-size: 10MB

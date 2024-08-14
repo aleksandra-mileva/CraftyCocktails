@@ -22,7 +22,10 @@ services:
     environment:
       - MYSQL_HOST=db
       - MYSQL_PORT=3306
-      - USERNAME=root
+      - MYSQL_USER=root
+      - CLAUDINARY_API_KEY=478985327646651
+      - CLAUDINARY_API_SECRET=i3CwHZ9gUu8YYHzop8jqco6ErVY
+      - EMAIL_PASSWORD=keys jnos athx ocwl
       - FORTUNES_SERVICE_HOST=fortunes
   fortunes:
     depends_on:
