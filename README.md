@@ -32,6 +32,7 @@ This project is a blog about cocktails. It is a place where users can find cockt
 - Schedulers
 - Cloudinary
 - CriteriaBuilder API
+- JavaMailSender
 - **Docker**
 
 ##  Functionality
@@ -85,6 +86,7 @@ This project is a blog about cocktails. It is a place where users can find cockt
 - **Liquibase** for the database of Drinking Fortunes REST API
 - **MapStruct** in Drinking Fortunes REST API (ModelMapper in this project)
 - **CriteriaBuilder** API
+- **JavaMailSender** for sending verification emails and forgotten password emails
 - Website is **Responsive**
 - Readme file
 
